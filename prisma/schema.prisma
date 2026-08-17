@@ -1,0 +1,249 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id            String    @id @default(cuid())
+  uid           String?   @unique
+  studentId     String    @unique  // 学号，登录用
+  name          String
+  email         String?
+  emailVerified DateTime?
+  image         String?
+  password      String?   // bcrypt hash
+  bio           String?
+  phone         String?
+  tags          String   @default("[]")
+  role          String   @default("student") // admin | class_leader | student
+  physicalTest  Boolean?  // 体测是否过关（学生自填，综测页收集）
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  sessions      Session[]
+  drawnIn        ActivityDraw[]         @relation("DrawSubject")
+  delegatedToMe  ActivityDraw[]         @relation("DrawTarget")
+  volunteers     ActivityVolunteer[]
+  participations ActivityParticipation[]
+  courseScores   CourseScore[]
+  zongceSections ZongceSection[]
+  committeeRated   CommitteeRating[]  @relation("CommitteeRater")
+  committeeTargeted CommitteeRating[] @relation("CommitteeTarget")
+
+  @@map("users")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+model InviteCode {
+  id        String   @id @default(cuid())
+  code      String   @unique
+  used      Boolean  @default(false)
+  usedBy    String?
+  usedAt    DateTime?
+  createdAt DateTime @default(now())
+
+  @@map("invite_codes")
+}
+
+model Announcement {
+  id        String   @id @default(cuid())
+  title     String
+  content   String
+  pinned    Boolean  @default(false)
+  authorId  String
+  authorName String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("announcements")
+}
+
+model ImportantInfo {
+  id        String   @id @default(cuid())
+  title     String
+  content   String
+  type      String   @default("notice") // notice | schedule | resource
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("important_infos")
+}
+
+// ============================================================
+// Activity Participation System
+// ============================================================
+
+model Activity {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  eventTime   String?   // 活动时间
+  location    String?   // 地点
+  link        String?   // 相关链接
+  status      String   @default("pending")
+  createdBy   String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  draws       ActivityDraw[]
+  volunteers  ActivityVolunteer[]
+
+  @@map("activities")
+}
+
+model ActivityDraw {
+  id          String   @id @default(cuid())
+  activityId  String
+  userId      String
+  studentId   String
+  round       Int      @default(1)
+  status      String   @default("drawn")  // drawn | completed | cancelled | delegated
+  source      String   @default("drawn")  // drawn | assigned | volunteered
+  delegateTo  String?                      // target userId for delegation
+  delegateApproved Boolean @default(false)
+  createdAt   DateTime @default(now())
+
+  activity    Activity        @relation(fields: [activityId], references: [id], onDelete: Cascade)
+  user        User            @relation("DrawSubject", fields: [userId], references: [id], onDelete: Cascade)
+  delegate    User?           @relation("DrawTarget", fields: [delegateTo], references: [id])
+
+  @@map("activity_draws")
+}
+
+model ActivityVolunteer {
+  id          String   @id @default(cuid())
+  activityId  String
+  userId      String
+  studentId   String
+  createdAt   DateTime @default(now())
+
+  activity    Activity @relation(fields: [activityId], references: [id], onDelete: Cascade)
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("activity_volunteers")
+}
+
+model ActivityParticipation {
+  id              String   @id @default(cuid())
+  userId          String   @unique
+  completedCount  Int      @default(0)
+  cancelledCount  Int      @default(0)
+  lastDrawnRound  Int?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("activity_participations")
+}
+
+model DelegationNotification {
+  id          String   @id @default(cuid())
+  userId      String
+  drawId      String
+  activityId  String
+  fromName    String
+  read        Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  @@map("delegation_notifications")
+}
+
+// ============================================================
+// Zongce (综测) System
+// ============================================================
+
+model Course {
+  id         String  @id @default(cuid())
+  name       String  // 课程名称
+  credits    Float   // 学分
+  semester   Int     // 学期: 1 or 2
+  isElective Boolean @default(false) // 任选课（不参与绩点计算）
+  sortOrder  Int     @default(0)
+
+  scores     CourseScore[]
+
+  @@map("courses")
+}
+
+model CourseScore {
+  id       String @id @default(cuid())
+  courseId String
+  userId   String
+  score    Float? // 百分制成绩 (nullable until filled)
+  grade    String? // 五级制: 优秀|良好|中等|及格|不及格
+  gpa      Float? // 自动计算的绩点
+  repeat   Boolean @default(false) // 是否重修（重修课程绩点默认 0）
+
+  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([courseId, userId])
+  @@map("course_scores")
+}
+
+model ZongceSection {
+  id          String   @id @default(cuid())
+  userId      String
+  section     String   // "S" | "A" | "B" | "C" | "D" | "E" | "F"
+  data        String   @default("{}")   // JSON: section-specific data (e.g., {absences:2} for A)
+  score       Float    @default(0)      // calculated score for this section
+  status      String   @default("not_started") // not_started | draft | submitted | approved | returned
+  evidence    String   @default("[]")   // JSON array of image URLs
+  reviewNote  String?  // 审核意见 / 退回理由
+  submittedAt DateTime?
+  reviewedAt  DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, section])
+  @@map("zongce_sections")
+}
+
+// ============================================================
+// Committee Rating (班委民主评议) System
+// 多版本存储：每次提交插入一组新记录（version +1），
+// 当前分 = 每组 (year, raterId, targetId) 中 version 最大的一条
+// ============================================================
+
+model CommitteeRating {
+  id        String   @id @default(cuid())
+  year      String   // 学年 "2025-2026"
+  raterId   String   // 打分人（每个同学）
+  targetId  String   // 被评班委
+  score     Int      // 0-100 分
+  version   Int      @default(1) // 提交版本（第几次提交）
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  rater  User @relation("CommitteeRater", fields: [raterId], references: [id], onDelete: Cascade)
+  target User @relation("CommitteeTarget", fields: [targetId], references: [id], onDelete: Cascade)
+
+  @@index([year, raterId])
+  @@index([year, targetId])
+  @@map("committee_ratings")
+}

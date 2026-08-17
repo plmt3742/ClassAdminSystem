@@ -1,0 +1,65 @@
+# ===== 依赖与构建产物 =====
+node_modules/
+.next/
+out/
+dist/
+build/
+
+# ===== 环境变量与密钥（绝不提交）=====
+.env
+.env.local
+.env.*.local
+.env.production
+.env.development
+
+# ===== 数据库（含真实数据）=====
+prisma/dev.db
+prisma/dev.db-journal
+*.sqlite
+*.sqlite3
+
+# ===== 运行时数据 =====
+public/uploads/
+uploads/
+
+# ===== 日志与临时文件 =====
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.DS_Store
+Thumbs.db
+*.tsbuildinfo
+
+# ===== 部署/内部文档（含服务器信息，勿公开）=====
+DEPLOY.md
+DESIGN-GUIDE.md
+students.json
+
+# ===== 测试与开发残留 =====
+test-api.js
+check-*.js
+verify-*.js
+welcome-form.yml
+committee-rank*.html
+committee-rank*.png
+/academic-*.png
+/academic-*.html
+review-s-list.png
+class-app/
+*.bak.tsx
+*.bak
+design-demos/
+
+# ===== 编辑器与 IDE =====
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# ===== 其他 =====
+.backup/
+.codegraph/
+.omo/
+.playwright-mcp/
