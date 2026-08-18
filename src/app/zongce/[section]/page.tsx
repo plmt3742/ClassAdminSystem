@@ -2299,7 +2299,7 @@ function EForm() {
           <div className="zs-id-name">{(user as any)?.name}</div>
           <div className="zs-id-meta">
             <span><Calendar size={11} /> {(user as any)?.studentId || "—"}</span>
-            <span><User size={11} /> 工业软件二班</span>
+            <span><User size={11} /> 班务管理</span>
           </div>
         </div>
         <Link href="/zongce/select" className="zs-id-badge" title="切换综测学年">2025-2026 学年</Link>
@@ -2760,7 +2760,7 @@ function FForm() {
           <div className="zs-id-name">{(user as any)?.name}</div>
           <div className="zs-id-meta">
             <span><Calendar size={11} /> {(user as any)?.studentId || "—"}</span>
-            <span><User size={11} /> 工业软件二班</span>
+            <span><User size={11} /> 班务管理</span>
           </div>
         </div>
         <Link href="/zongce/select" className="zs-id-badge" title="切换综测学年">2025-2026 学年</Link>
@@ -3270,7 +3270,7 @@ function DForm() {
           <div className="zs-id-name">{(user as any)?.name}</div>
           <div className="zs-id-meta">
             <span><Calendar size={11} /> {(user as any)?.studentId || "—"}</span>
-            <span><User size={11} /> 工业软件二班</span>
+            <span><User size={11} /> 班务管理</span>
           </div>
         </div>
         <Link href="/zongce/select" className="zs-id-badge" title="切换综测学年">2025-2026 学年</Link>
@@ -3486,7 +3486,7 @@ function CView() {
           <div className="zs-id-name">{(user as any)?.name}</div>
           <div className="zs-id-meta">
             <span><Calendar size={11} /> {(user as any)?.studentId || "—"}</span>
-            <span><User size={11} /> 工业软件二班</span>
+            <span><User size={11} /> 班务管理</span>
           </div>
         </div>
         <Link href="/zongce/select" className="zs-id-badge" title="切换综测学年">2025-2026 学年</Link>
@@ -3600,7 +3600,7 @@ function BView() {
           <div className="zs-id-name">{(user as any)?.name}</div>
           <div className="zs-id-meta">
             <span><Calendar size={11} /> {(user as any)?.studentId || "—"}</span>
-            <span><User size={11} /> 工业软件二班</span>
+            <span><User size={11} /> 班务管理</span>
           </div>
         </div>
         <Link href="/zongce/select" className="zs-id-badge" title="切换综测学年">2025-2026 学年</Link>
@@ -3853,7 +3853,7 @@ function SectionAForm() {
           <div className="zs-id-name">{(user as any)?.name}</div>
           <div className="zs-id-meta">
             <span><Calendar size={11} /> {(user as any)?.studentId || "—"}</span>
-            <span><User size={11} /> 工业软件二班</span>
+            <span><User size={11} /> 班务管理</span>
           </div>
         </div>
         <Link href="/zongce/select" className="zs-id-badge" title="切换综测学年">2025-2026 学年</Link>
@@ -4119,7 +4119,7 @@ function SScoreForm() {
       </div>
       <div className="zs-id">
         <div className="zs-id-avatar">{(user as any)?.name?.[0] || "?"}</div>
-        <div className="zs-id-info"><div className="zs-id-name">{(user as any)?.name}</div><div className="zs-id-meta"><span><Calendar size={11} /> {(user as any)?.studentId || "—"}</span><span><User size={11} /> 工业软件二班</span></div></div>
+        <div className="zs-id-info"><div className="zs-id-name">{(user as any)?.name}</div><div className="zs-id-meta"><span><Calendar size={11} /> {(user as any)?.studentId || "—"}</span><span><User size={11} /> 班务管理</span></div></div>
         <Link href="/zongce/select" className="zs-id-badge" title="切换综测学年">2025-2026 学年</Link>
       </div>
       <RuleBlock label="学习成绩 S" rules={SECTION_META.S.rules} reviewer={SECTION_META.S.reviewer} max={0} extra={`本学年 ${courses.length} 门课程`} />

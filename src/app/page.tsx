@@ -272,7 +272,7 @@ export default function HomePage() {
         )}
 
         <div className="m-foot" style={{ textAlign: "center", padding: "22px 16px 8px", fontFamily: "var(--font-mono)", fontSize: 9, color: "var(--color-muted-light)", letterSpacing: ".08em" }}>
-          工业软件二班 · 数据每日 23:00 同步
+          班务管理 · 数据每日 23:00 同步
         </div>
       </div>
 

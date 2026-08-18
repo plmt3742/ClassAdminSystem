@@ -325,7 +325,7 @@ export default function ActivitiesPage() {
       )}
 
       <div className="m-foot" style={{ textAlign: "center", padding: "22px 16px 8px", fontFamily: "var(--font-mono)", fontSize: 9, color: "var(--color-muted-light)", letterSpacing: ".08em" }}>
-        工业软件二班 · 班级事务平台<br /><b style={{ fontWeight: 600 }}>CLASS ADMIN</b> · 数据每日 23:00 同步
+        班级事务 · 一体化管理平台<br /><b style={{ fontWeight: 600 }}>CLASS ADMIN</b> · 数据每日 23:00 同步
       </div>
     </div>
   )

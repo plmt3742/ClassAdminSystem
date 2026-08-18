@@ -258,7 +258,7 @@ export default function MembersPage() {
       )}
 
       <div className="m-foot" style={{ textAlign: "center", padding: "22px 16px 8px", fontFamily: "var(--font-mono)", fontSize: 9, color: "var(--color-muted-light)", letterSpacing: ".08em" }}>
-        工业软件二班 · 班级事务平台<br /><b>CLASS ADMIN</b> · 数据每日 23:00 同步
+        班级事务 · 一体化管理平台<br /><b>CLASS ADMIN</b> · 数据每日 23:00 同步
       </div>
     </div>
   )
@@ -274,7 +274,7 @@ export default function MembersPage() {
             <ArrowLeft size={15} /> 返回首页
           </Link>
           <div>
-            <div className="mb-eyebrow">班级信息 · 工业软件二班</div>
+            <div className="mb-eyebrow">班级信息 · 班级成员</div>
             <h1 className="mb-title">班级成员<em>Class Members</em></h1>
           </div>
         </div>

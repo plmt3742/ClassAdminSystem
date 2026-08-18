@@ -76,7 +76,7 @@ export default function ModulesPage() {
       </div>
 
       <div className="m-foot" style={{ textAlign: "center", padding: "22px 16px 8px", fontFamily: "var(--font-mono)", fontSize: 9, color: "var(--color-muted-light)", letterSpacing: ".08em" }}>
-        工业软件二班 · 班级事务平台
+        班级事务 · 一体化管理平台
       </div>
     </div>
   )

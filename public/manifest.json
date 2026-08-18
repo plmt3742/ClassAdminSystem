@@ -1,7 +1,7 @@
 {
   "name": "班务管理",
   "short_name": "班务管理",
-  "description": "工业软件二班 · 班级事务平台",
+  "description": "班级事务 · 一体化管理平台",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#F8FAF8",

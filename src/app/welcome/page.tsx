@@ -153,7 +153,7 @@ export default function WelcomePage() {
           <div className="wl-brand">
             <div className="wl-logo">M</div>
             <h1 className="wl-title">班务管理</h1>
-            <div className="wl-sub">工业软件二班 · 班级事务平台</div>
+            <div className="wl-sub">班级事务 · 一体化管理平台</div>
           </div>
 
           {error && (
@@ -202,7 +202,7 @@ export default function WelcomePage() {
         <div className="welcome-brand">
           <div className="welcome-brand-icon">M</div>
           <h1>班务管理</h1>
-          <p>工业软件二班 · 班级事务平台</p>
+          <p>班级事务 · 一体化管理平台</p>
         </div>
 
         {error && (

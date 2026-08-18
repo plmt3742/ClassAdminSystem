@@ -8,7 +8,7 @@ import "./globals.css"
 
 export const metadata: Metadata = {
   title: "班务管理",
-  description: "工业软件二班 · 班级事务平台",
+  description: "班级事务 · 一体化管理平台",
   appleWebApp: { capable: true, title: "班务管理", statusBarStyle: "default" },
 }
 

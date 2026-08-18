@@ -275,7 +275,7 @@ export default function MobileProfilePage() {
       <div style={{ textAlign: "center", padding: "20px 16px 8px", fontSize: 11, color: "var(--fg-3)", letterSpacing: "0.04em", lineHeight: 1.8 }}>
         班务管理 · 移动端 v1.0
         <br />
-        工业软件二班 · 数据每日 23:00 同步
+        班务管理 · 数据每日 23:00 同步
       </div>
 
       {/* 编辑资料弹层 */}

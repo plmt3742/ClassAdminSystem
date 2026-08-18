@@ -300,7 +300,7 @@ export default function MobileHomePage() {
 
       {/* 底部版权 */}
       <div style={{ textAlign: "center", padding: "20px 16px 8px", fontSize: 11, color: "var(--fg-3)", letterSpacing: "0.04em" }}>
-        工业软件二班 · 数据每日 23:00 同步
+        班务管理 · 数据每日 23:00 同步
       </div>
     </div>
   )
